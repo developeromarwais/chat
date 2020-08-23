@@ -1,6 +1,7 @@
 import React from "react";
 import { Carousel } from 'react-bootstrap';
-
+import 'font-awesome/css/font-awesome.min.css';
+import LiveChat from '../../components/LiveChat/LiveChat.js'
 import apiCall from "../../api";
 import "./style.scss";
 
@@ -9,7 +10,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeIndex: 0
+      activeIndex: 0,
     };
   }
 
@@ -37,12 +38,10 @@ class Home extends React.Component {
               <div className="col-md-6">
                 <div className="bg bg15">
                   <span className="txt">
-                    Craft Your message
+                    Craft Your Message
                   </span>
                 </div>
               </div>
-
-
             </div>
 
           </Carousel.Item>
@@ -87,6 +86,7 @@ class Home extends React.Component {
             </div>
           </Carousel.Item>
         </Carousel>
+        <LiveChat />
       </div>
     );
   }
