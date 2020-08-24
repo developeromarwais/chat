@@ -1,6 +1,6 @@
 import React from "react";
 import { ChatFeed, Message } from 'react-chat-ui'
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, InputGroup, FormControl } from 'react-bootstrap';
 import { Container, Button as FabButton, Link } from 'react-floating-action-button'
 import 'font-awesome/css/font-awesome.min.css';
 import apiCall from "../../api";
@@ -12,15 +12,9 @@ export default class LiveChat extends React.Component {
         this.state = {
             activeIndex: 0,
             show: false,
+            messageContent: '',
             is_typing: true,
-            messages: [
-                new Message({
-                    id: 1,
-                    message: "I'm the recipient! (The person you're talking to)",
-                }), // Gray bubble
-                new Message({ id: 0, message: "I'm you -- the blue bubble!" }), // Blue bubble
-                new Message({ id: 1, message: "lel!" }), // Blue bubble
-            ],
+            messages: [],
         };
     }
 
@@ -41,6 +35,37 @@ export default class LiveChat extends React.Component {
         })
     }
 
+    componentDidMount() {
+        const config = {
+            headers: { Authorization: `Bearer ${window.localStorage["messagingboared.api_token"]}` }
+        };
+        apiCall(`messages`, "get", null, config, (res) => {
+            var DisplayedMEssages = res.data.map((message) => {
+                return new Message({ id: window.localStorage["messagingboared.userId"] == message.sender_id ? 0 : 1, message: message.content })
+            })
+            this.setState({
+                messages: DisplayedMEssages
+            })
+        }, (err) => {
+        })
+    }
+
+    sendMessage = () => {
+        const config = {
+            headers: { Authorization: `Bearer ${window.localStorage["messagingboared.api_token"]}` }
+        };
+
+        let message = new FormData();
+        message.append('content', this.state.messageContent);
+        message.append('sender_id', window.localStorage["messagingboared.userId"]);
+        message.append('receiver_id', 2);
+        apiCall(`messages`, "post", message, config, (res) => {
+            this.setState({
+                messageContent: ''
+            })
+        }, (err) => {
+        })
+    }
 
     render() {
 
@@ -75,12 +100,33 @@ export default class LiveChat extends React.Component {
                         />
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={this.handleClose}>
-                            Close
-                        </Button>
-                        <Button variant="primary" onClick={this.handleClose}>
-                            Save Changes
-                        </Button>
+                        <InputGroup className="mb-3">
+                            <FormControl
+                                value={this.state.messageContent}
+                                onChange={(event) => {
+                                    this.setState({
+                                        messageContent: event.target.value
+                                    })
+                                }}
+                                onKeyDown={(e) => {
+                                    if (e.keyCode === 13) {
+                                        this.sendMessage()
+                                    }
+                                }}
+                                placeholder="Your message"
+                                aria-label="Username"
+                                className="msgInput"
+                                aria-describedby="basic-addon1"
+                            />
+                            <InputGroup.Prepend>
+                                <Button variant="primary" className="sndBtn" onClick={this.sendMessage}>
+                                    <span className="fa fa-paper-plane">
+
+                                    </span>
+                                </Button>
+                            </InputGroup.Prepend>
+
+                        </InputGroup>
                     </Modal.Footer>
                 </Modal>
 

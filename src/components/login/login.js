@@ -3,6 +3,7 @@ import apiCall from "../../api";
 import '../login/style.css';
 
 export default class Login extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -34,6 +35,7 @@ export default class Login extends Component {
             window.localStorage["messagingboared.api_token"] = res.data.data.api_token;
             window.localStorage["messagingboared.userId"] = res.data.data.id;
             window.localStorage["messagingboared.userName"] = res.data.data.name;
+            window.location.reload();
         }, (err) => {
             debugger
             if (err.response.status === 422) {
@@ -49,6 +51,7 @@ export default class Login extends Component {
     }
     render() {
         const { validationSummary } = this.state;
+
         return (
 
 
@@ -79,7 +82,7 @@ export default class Login extends Component {
                             {validationSummary.password.length > 0 &&
                                 (<>
                                     <div style={{ color: "#7b7b7b", fontSize: "18px", textAlign: "left", padding: "10px" }}>
-                                        <span style={{ color: "red" }}>
+                                        <span style={{ color: "white" }}>
                                             {validationSummary.password}
                                         </span>
                                     </div>
@@ -89,7 +92,7 @@ export default class Login extends Component {
                             {validationSummary.email.length > 0 &&
                                 (<>
                                     <div style={{ color: "#7b7b7b", fontSize: "18px", textAlign: "left", padding: "10px" }}>
-                                        <span style={{ color: "red" }}>
+                                        <span style={{ color: "white" }}>
                                             {validationSummary.email}
                                         </span>
                                     </div>

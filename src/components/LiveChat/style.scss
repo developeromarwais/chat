@@ -24,13 +24,17 @@
     bottom: 62px;
     right: 97px;
     .modal-content{
-        .modal-header{
+        .modal-header{ 
             button{
                 position: relative;
                 top: 2px;
                 right: 10px;
                 font-size: 39px;
             }
+        }
+        .modal-body{
+            min-height: 500px;
+            min-width: 400px;
         }
         border-radius: 30px 30px 0px 30px;
     }
@@ -43,5 +47,10 @@
      opacity: 0!important;
  }
 
+.msgInput{
+    border-radius:30px 0px 0px 30px !important
+}
 
-  
+.sndBtn{
+    border-radius: 0px 15px 15px 0px !important;
+}
