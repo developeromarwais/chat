@@ -89,11 +89,12 @@ export default class LiveChat extends React.Component {
                             bubbleStyles={
                                 {
                                     text: {
-                                        fontSize: 21
+                                        fontSize: 16,
+                                        maxWidth: '300px'
                                     },
                                     chatbubble: {
                                         borderRadius: 70,
-                                        padding: 14
+                                        padding: 12
                                     }
                                 }
                             }

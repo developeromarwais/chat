@@ -3,77 +3,14 @@ body, html {
   margin: 0;
 }
 .parentHome{
+  background-image: url('https://pixelz.cc/wp-content/uploads/2018/11/selena-gomez-pantene-photoshoot-uhd-4k-wallpaper.jpg');;
+  background-size: cover;
+  background-repeat: no-repeat;
   background-color: white;
   height: 100%;
   margin: 0; 
 }
-
-.carousel.slide{
-  height: 100%;
-  .carousel-inner{
-    height: 100%;
-    .carousel-item{
-      height: 100%;
-      .row{
-        height: 100%;
-        .col-md-6{
-          padding: 0;
-        }
-      }
-    }
-  }
-}
-
-.bg{ 
-  /* Full height */
-  height: 100%; 
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
- }
-.bg1 {
-   background-image: url("/images/1.png"); 
-} 
-.bg15 {
-   margin: auto;
-  font-size: 12vw;
-  text-align: left;
-  font-weight: 800;
-  background-image: linear-gradient(-90deg, #57577c, #1e1842);
-  transition: 50%;
-  color: #d98e9b;
-  line-height: 100%;
- } 
- .bg25 {
-   margin: auto;
-  font-size: 12vw;
-  text-align: right;
-  font-weight: 800;
-  background-image: linear-gradient(-90deg, #373866, #1e1842);
-  transition: 50%;
-  color: #d98e9b;
-  line-height: 100%;
- } 
- .bg35 {
-  margin: auto;
- font-size: 12vw;
- text-align: left;
- font-weight: 800;
- background-image: linear-gradient(-90deg, #2c685e, #07283f);
- transition: 50%;
- color: #dcf4f3;
-  line-height: 100%;
-} 
-.bg2 {
-  background-image: url("/images/2.png"); 
-  background-position: right; 
-} 
-.bg3 {
-  background-image: url("/images/3.png"); 
-}
-
+ 
 
 .txt{
   padding: 12px;
