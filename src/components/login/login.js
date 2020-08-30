@@ -22,9 +22,7 @@ export default class Login extends Component {
         let Login = new FormData();
         Login.append('email', this.state.emailValue);
         Login.append('password', this.state.passwordValue);
-        debugger
         apiCall(`login`, "post", Login, null, (res) => {
-            debugger
             this.setState({
                 validationSummary: {
                     validated: true,
@@ -32,12 +30,10 @@ export default class Login extends Component {
                     password: ""
                 }
             })
-            window.localStorage["messagingboared.api_token"] = res.data.data.api_token;
-            window.localStorage["messagingboared.userId"] = res.data.data.id;
-            window.localStorage["messagingboared.userName"] = res.data.data.name;
+            window.localStorage["messagingboared.api_token"] = res.data.success.token;
+            window.localStorage["messagingboared.userId"] = res.data.success.userId;
             window.location.reload();
         }, (err) => {
-            debugger
             if (err.response.status === 422) {
                 this.setState({
                     validationSummary: {
@@ -55,9 +51,7 @@ export default class Login extends Component {
         return (
 
 
-            <div className="auth-wrapper" style={{
-                backgroundImage: `url('https://www.alpha-apps.ae/static/1af00d45b8d6447b94c1e0d59354c156/f91a2/cover1.png')`
-            }}>
+            <div className="auth-wrapper" style={{}}>
                 <div className="auth-inner">
                     <>
                         <h3>Let's Talk</h3>

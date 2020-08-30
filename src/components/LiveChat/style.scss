@@ -3,26 +3,48 @@
     bottom: 1vh;
     right: 1vw;
     button.fab-item{
-        width: 70px;
-        height: 70px;
-        background-color: rgb(217, 142, 155)!important;
+        width: 85px;
+        height: 85px;
+        background-color: #242526!important;
+        color:#2f86fb!important;
         i{
             font-size: 24px;
         }
     }
+    .Chathead{
+        border:5px solid #2f86fb!important;
+        font-size: 32px; 
+    }
+    
 }
 
 .modal.show{
     position: absolute;
-    z-index: 1;
-
-
+    z-index: 3;
 }
+
+@media only screen and (max-width: 600px) {
+    .modal-dialog {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        bottom: 0!important;
+        right: 0!important;
+        margin: 0 auto;
+    }
+    .modal-content{
+        bottom: 0!important;
+        position: absolute!important;
+    }
+    #chat-panel{
+        width: 90%;
+    }
+  }
 
 .modal-dialog.modal-xl{
     position: absolute;
-    bottom: 62px;
-    right: 97px;
+    bottom: 88px;
+    right: 48px;
     .modal-content{
         .modal-header{ 
             button{

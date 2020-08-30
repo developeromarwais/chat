@@ -1,17 +1,31 @@
 body, html {
   height: 100%;
   margin: 0;
-}
-.parentHome{
-  background-image: url('https://pixelz.cc/wp-content/uploads/2018/11/selena-gomez-pantene-photoshoot-uhd-4k-wallpaper.jpg');;
+  background-image: url('https://www.alpha-apps.ae/static/f1544034c078dd16c6fae7306e4be94d/cb61f/analyze.png');
   background-size: cover;
-  background-repeat: no-repeat;
-  background-color: white;
-  height: 100%;
-  margin: 0; 
-}
- 
+  background-position: left;
+ } 
 
 .txt{
   padding: 12px;
+}
+
+
+.fab-container.contacts{
+  right: 6vw;
+}
+
+
+ .userAvatar{
+  height: 80px;
+  width: 80px;
+  border:5px solid #2f86fb;
+  color: #2f86fb;
+  border-radius: 50%;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 80px;
+  margin: 0 auto;
+  margin-bottom: 8px;
+  margin-top: 8px;
 }
