@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const API_URL = "http://pizzapi.omarwais.com/api/";
-const API_URL = "http://127.0.0.1:8000/api/";
+const API_URL = "http://chat-back.omarwais.com/api/";
+// const API_URL = "http://127.0.0.1:8000/api/";
 
 const apiCall = (url, method, data, config, callback, err) => {
   switch (method) {

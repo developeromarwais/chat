@@ -23,6 +23,7 @@ export default class Login extends Component {
         Login.append('email', this.state.emailValue);
         Login.append('password', this.state.passwordValue);
         apiCall(`login`, "post", Login, null, (res) => {
+            debugger
             this.setState({
                 validationSummary: {
                     validated: true,

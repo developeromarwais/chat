@@ -2,8 +2,7 @@ import React from "react";
 import { ChatFeed, Message } from 'react-chat-ui'
 import Pusher from 'pusher-js';
 import { Modal, Button, InputGroup, FormControl } from 'react-bootstrap';
-import Echo from "laravel-echo";
-import { Container, Button as FabButton, Link } from 'react-floating-action-button'
+import { Container, Button as FabButton } from 'react-floating-action-button'
 import 'font-awesome/css/font-awesome.min.css';
 import apiCall from "../../api";
 import "./style.scss";
@@ -47,22 +46,24 @@ export default class LiveChat extends React.Component {
 
 
     sendMessage = () => {
+        let theMessage = this.state.messageContent
+        this.setState({
+            messageContent: ''
+        })
         const config = {
             headers: { Authorization: `Bearer ${window.localStorage["messagingboared.api_token"]}` }
         };
 
         let message = new FormData();
-        message.append('content', this.state.messageContent);
+        message.append('content', theMessage);
         message.append('sender_id', window.localStorage["messagingboared.userId"]);
         message.append('receiver_id', this.props.activeUser.id);
         apiCall(`messages`, "post", message, config, (res) => {
-            var newMessage = new Message({ id: 0, message: this.state.messageContent })
+            var newMessage = new Message({ id: 0, message: theMessage })
             var newDisplayedMessages = this.state.messages;
             newDisplayedMessages.push(newMessage)
             this.setState({
                 messages: newDisplayedMessages,
-                messageContent: ''
-
             })
         }, (err) => {
         })
@@ -74,16 +75,12 @@ export default class LiveChat extends React.Component {
     componentDidMount() {
         this.getMessages();
         const pusher = new Pusher('31386b6513308fa6b50b', {
-            cluster: 'eu',
-            encrypted: true,
             broadcaster: "pusher",
             key: "31386b6513308fa6b50b",
             cluster: "eu",
             forceTLS: true,
             encrypted: false,
-            //authEndpoint is your apiUrl + /broadcasting/auth
-            authEndpoint: "http://localhost:8000/api/pusher/auth/chat",
-            // As I'm using JWT tokens, I need to manually set up the headers.
+            authEndpoint: "http://chat-back.omarwais.com/api/pusher/auth/chat",
             auth: {
                 headers: {
                     Authorization: "Bearer " + window.localStorage["messagingboared.api_token"],
@@ -111,8 +108,10 @@ export default class LiveChat extends React.Component {
         };
         apiCall(`messages/${this.props.activeUser.id}`, "get", null, config, (res) => {
             var DisplayedMEssages = res.data.map((message) => {
+                // eslint-disable-next-line
                 return new Message({ id: window.localStorage["messagingboared.userId"] == message.sender_id ? 0 : 1, message: message.content })
             })
+            debugger
             this.setState({
                 messages: DisplayedMEssages
             })

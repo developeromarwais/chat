@@ -1,6 +1,6 @@
 import React from "react";
 import 'font-awesome/css/font-awesome.min.css';
-import { Container, Button as FabButton, Link } from 'react-floating-action-button'
+import { Container, Button as FabButton } from 'react-floating-action-button'
 import LiveChat from '../../components/LiveChat/LiveChat.js'
 import Sidebar from "react-sidebar";
 import Echo from "laravel-echo";
@@ -17,10 +17,7 @@ class Home extends React.Component {
       sidebarOpen: true,
       modalOpen: false,
       ActiveUser: {},
-      users: [
-        { name: "OW", id: 1 },
-        { name: "MD", id: 2 },
-      ]
+      users: []
     };
   }
 
@@ -54,7 +51,7 @@ class Home extends React.Component {
       cluster: "eu",
       forceTLS: true,
       encrypted: false,
-      authEndpoint: "http://localhost:8000/api/pusher/auth",
+      authEndpoint: "http://chat-back.omarwais.com/api/pusher/auth",
       auth: {
         headers: {
           Authorization: "Bearer " + window.localStorage["messagingboared.api_token"],
@@ -72,13 +69,13 @@ class Home extends React.Component {
         }).map(user => user.id)
         var allUsers = this.state.users.map(user => {
           if (corssedOnlineUsers.includes(user.id)) {
-            var thisUser = user;
-            thisUser.online = true;
-            return thisUser;
+            var thisUserOn = user;
+            thisUserOn.online = true;
+            return thisUserOn;
           } else {
-            var thisUser = user;
-            thisUser.online = false;
-            return thisUser;
+            var thisUserOff = user;
+            thisUserOff.online = false;
+            return thisUserOff;
           }
         })
         this.setState({
@@ -88,7 +85,7 @@ class Home extends React.Component {
       .joining((user) => {
         this.setState({
           users: this.state.users.map(dbUser => {
-            if (dbUser.id == user.id)
+            if (dbUser.id === user.id)
               dbUser.online = true;
             return dbUser;
           })
@@ -97,7 +94,7 @@ class Home extends React.Component {
       .leaving((user) => {
         this.setState({
           users: this.state.users.map(dbUser => {
-            if (dbUser.id == user.id)
+            if (dbUser.id === user.id)
               dbUser.online = false;
             return dbUser;
           })
